@@ -1,14 +1,29 @@
----
-layout: base.njk
-title: Morning Briefings
+---js
+{
+  layout: "base.njk",
+  title: "Morning Briefings",
+  eleventyComputed: {
+    headerDate: (data) => {
+      const briefings = data.collections.briefings;
+      if (briefings && briefings.length > 0) {
+        const date = new Date(briefings[0].fileSlug + "T12:00:00");
+        return date.toLocaleDateString("en-US", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        });
+      }
+      return null;
+    }
+  }
+}
 ---
 
 {% set latestBriefing = collections.briefings | first %}
 
 {% if latestBriefing %}
 <article class="featured-briefing">
-  <time class="briefing-date" datetime="{{ latestBriefing.fileSlug }}">{{ latestBriefing.fileSlug | readableDate }}</time>
-  <hr class="featured-rule">
   <div class="featured-content">
     {{ latestBriefing.content | stripFirstH1 | safe }}
   </div>

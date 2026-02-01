@@ -12,7 +12,10 @@
 <body>
   <header>
     <div class="masthead">
-      <a href="/" class="masthead-title">{{ site.title }}</a>
+      <div class="masthead-row">
+        <a href="/" class="masthead-title">{{ site.title }}</a>
+        {% if headerDate %}<time class="masthead-date">{{ headerDate }}</time>{% endif %}
+      </div>
       <hr class="masthead-rule">
       <hr class="masthead-rule thin">
     </div>
