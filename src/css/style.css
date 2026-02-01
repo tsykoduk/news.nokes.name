@@ -1,48 +1,88 @@
+/* ==========================================================================
+   Morning Briefings - Editorial Broadsheet Design
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Fonts
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* --------------------------------------------------------------------------
+   CSS Variables - Editorial Palette
+   -------------------------------------------------------------------------- */
 :root {
-  --bg: #fafafa;
-  --text: #222;
-  --text-muted: #666;
-  --accent: #0066cc;
-  --border: #e0e0e0;
-  --max-width: 720px;
+  /* Colors */
+  --ink: #0d0d0d;
+  --paper: #f7f5f0;
+  --accent: #c41230;
+  --muted: #6b6b6b;
+  --rule: #d4d0c8;
+  --link: #1a4d7c;
+  --link-hover: #c41230;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+  /* Spacing */
+  --max-width: 760px;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-xxl: 4rem;
 }
 
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1a1a1a;
-    --text: #e0e0e0;
-    --text-muted: #999;
-    --accent: #66b3ff;
-    --border: #333;
+    --ink: #e8e4dc;
+    --paper: #1a1918;
+    --accent: #e85a6f;
+    --muted: #9a958d;
+    --rule: #3d3a36;
+    --link: #7db4d8;
+    --link-hover: #e85a6f;
   }
 }
 
-* {
+/* --------------------------------------------------------------------------
+   Reset & Base
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html {
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  padding: 2rem 1rem;
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.65;
+  padding: var(--space-lg) var(--space-md);
+}
+
+/* --------------------------------------------------------------------------
+   Layout
+   -------------------------------------------------------------------------- */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 
 header {
   max-width: var(--max-width);
-  margin: 0 auto 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.site-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text);
-  text-decoration: none;
+  margin: 0 auto var(--space-xl);
+  text-align: center;
 }
 
 main {
@@ -50,93 +90,435 @@ main {
   margin: 0 auto;
 }
 
+footer {
+  max-width: var(--max-width);
+  margin: var(--space-xxl) auto 0;
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--rule);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Masthead
+   -------------------------------------------------------------------------- */
+.masthead {
+  margin-bottom: var(--space-lg);
+}
+
+.masthead-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.masthead-title:hover {
+  color: var(--accent);
+}
+
+.masthead-rule {
+  border: none;
+  height: 3px;
+  background: var(--ink);
+  margin: var(--space-sm) 0;
+}
+
+.masthead-rule.thin {
+  height: 1px;
+  margin-top: 2px;
+}
+
+.masthead-date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   Typography
+   -------------------------------------------------------------------------- */
 h1 {
-  font-size: 1.75rem;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--space-lg);
+  letter-spacing: -0.01em;
 }
 
 h2 {
-  font-size: 1.25rem;
-  margin: 2rem 0 1rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
   font-weight: 600;
+  line-height: 1.25;
+  margin: var(--space-xl) 0 var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--ink);
 }
 
 h3 {
-  font-size: 1.1rem;
-  margin: 1.5rem 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
   font-weight: 600;
+  line-height: 1.3;
+  margin: var(--space-lg) 0 var(--space-sm);
+  color: var(--ink);
 }
 
 p {
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
 a {
-  color: var(--accent);
+  color: var(--link);
   text-decoration: none;
+  transition: color 0.15s ease;
 }
 
 a:hover {
-  text-decoration: underline;
-}
-
-ul, ol {
-  margin: 0 0 1rem 1.5rem;
-}
-
-li {
-  margin-bottom: 0.5rem;
-}
-
-.briefing-list {
-  list-style: none;
-  margin-left: 0;
-}
-
-.briefing-list li {
-  padding: 0.75rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.briefing-list a {
-  display: block;
-  font-size: 1.1rem;
-}
-
-.briefing-list time {
-  color: var(--text);
-}
-
-.empty-state {
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-footer {
-  max-width: var(--max-width);
-  margin: 3rem auto 0;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-  color: var(--text-muted);
-  font-size: 0.875rem;
-}
-
-/* Briefing content styles */
-article ul {
-  margin-bottom: 1.5rem;
-}
-
-article li {
-  margin-bottom: 0.75rem;
+  color: var(--link-hover);
 }
 
 strong {
   font-weight: 600;
 }
 
+em {
+  font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   Lists
+   -------------------------------------------------------------------------- */
+ul, ol {
+  margin: 0 0 var(--space-md) var(--space-lg);
+}
+
+li {
+  margin-bottom: var(--space-sm);
+}
+
+/* --------------------------------------------------------------------------
+   Horizontal Rules
+   -------------------------------------------------------------------------- */
 hr {
   border: none;
-  border-top: 1px solid var(--border);
-  margin: 2rem 0;
+  height: 1px;
+  background: var(--rule);
+  margin: var(--space-xl) 0;
+}
+
+/* Decorative section divider */
+.section-divider {
+  text-align: center;
+  margin: var(--space-xl) 0;
+  position: relative;
+}
+
+.section-divider::before {
+  content: '◆';
+  display: block;
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 0.5em;
+}
+
+/* --------------------------------------------------------------------------
+   Featured Briefing (Homepage)
+   -------------------------------------------------------------------------- */
+.featured-briefing {
+  background: transparent;
+  margin-bottom: var(--space-xxl);
+}
+
+.featured-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.featured-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: transparent;
+  padding: var(--space-xs) 0;
+}
+
+.featured-date {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.featured-title {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: var(--space-lg);
+  letter-spacing: -0.02em;
+}
+
+.featured-rule {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 30%, var(--rule) 30%);
+  margin-bottom: var(--space-lg);
+}
+
+.featured-content {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.featured-content h2 {
+  font-size: 1.35rem;
+  margin-top: var(--space-xl);
+}
+
+.featured-content h3 {
+  font-size: 1.1rem;
+}
+
+.featured-content p:first-of-type {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   Archive Section
+   -------------------------------------------------------------------------- */
+.archive-section {
+  margin-top: var(--space-xl);
+}
+
+.archive-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.archive-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.archive-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.archive-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.archive-list li {
+  margin: 0;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.archive-list li:last-child {
+  border-bottom: none;
+}
+
+.archive-list a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.archive-list a::before {
+  content: '▸';
+  color: var(--muted);
+  font-size: 0.75rem;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.archive-list a:hover {
+  color: var(--accent);
+}
+
+.archive-list a:hover::before {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+.archive-list time {
+  color: inherit;
+}
+
+/* --------------------------------------------------------------------------
+   Empty State
+   -------------------------------------------------------------------------- */
+.empty-state {
+  font-style: italic;
+  color: var(--muted);
+  text-align: center;
+  padding: var(--space-xl) 0;
+}
+
+/* --------------------------------------------------------------------------
+   Individual Briefing Page
+   -------------------------------------------------------------------------- */
+article {
+  margin-bottom: var(--space-xl);
+}
+
+article h1 {
+  font-size: 2rem;
+  margin-bottom: var(--space-lg);
+}
+
+article ul {
+  margin-bottom: var(--space-lg);
+}
+
+article li {
+  margin-bottom: var(--space-sm);
+}
+
+/* Source links styling */
+article p strong:only-child {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   Back Link
+   -------------------------------------------------------------------------- */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: var(--space-lg);
+  letter-spacing: 0.05em;
+  transition: color 0.15s ease;
+}
+
+.back-link::before {
+  content: '←';
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   Utilities
+   -------------------------------------------------------------------------- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Print Styles
+   -------------------------------------------------------------------------- */
+@media print {
+  body {
+    background: white;
+    color: black;
+    font-size: 11pt;
+  }
+
+  header, footer {
+    display: none;
+  }
+
+  .archive-section {
+    display: none;
+  }
+
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+
+  h2 {
+    border-bottom-color: black;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    padding: var(--space-md);
+  }
+
+  .masthead-title {
+    font-size: 1.75rem;
+  }
+
+  .featured-title {
+    font-size: 1.75rem;
+  }
+
+  .featured-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
 }

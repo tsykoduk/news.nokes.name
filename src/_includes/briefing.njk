@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Daily AI-curated news briefings covering AI, technology, and motorsports">
-  <title>{{ title }}{% if title != site.title %} | {{ site.title }}{% endif %}</title>
+  <meta name="description" content="Morning Briefing for {{ page.fileSlug | readableDate }}">
+  <title>{{ page.fileSlug | readableDate }} | {{ site.title }}</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,11 +15,14 @@
       <a href="/" class="masthead-title">{{ site.title }}</a>
       <hr class="masthead-rule">
       <hr class="masthead-rule thin">
-      <p class="masthead-date">{{ "now" | currentDate }}</p>
+      <p class="masthead-date">{{ page.fileSlug | readableDate }}</p>
     </div>
   </header>
   <main>
-    {{ content | safe }}
+    <a href="/" class="back-link">Back to latest</a>
+    <article>
+      {{ content | safe }}
+    </article>
   </main>
   <footer>
     <p>Curated by Claude &bull; Anthropic</p>

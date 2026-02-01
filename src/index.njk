@@ -1,19 +1,42 @@
 ---
 layout: base.njk
-title: Archive
+title: Morning Briefings
 ---
 
-<h1>Briefing Archive</h1>
+{% set latestBriefing = collections.briefings | first %}
 
-<ul class="briefing-list">
-{% for brief in collections.briefings %}
-  <li>
-    <a href="{{ brief.url }}">
-      <time>{{ brief.fileSlug | readableDate }}</time>
-    </a>
-  </li>
-{% endfor %}
-</ul>
+{% if latestBriefing %}
+<article class="featured-briefing">
+  <header class="featured-header">
+    <span class="featured-label">Latest Briefing</span>
+    <time class="featured-date" datetime="{{ latestBriefing.fileSlug }}">{{ latestBriefing.fileSlug | readableDate }}</time>
+  </header>
+  <hr class="featured-rule">
+  <div class="featured-content">
+    {{ latestBriefing.content | safe }}
+  </div>
+</article>
+{% endif %}
+
+{% set olderBriefings = collections.briefings | slice(1) %}
+
+{% if olderBriefings.length > 0 %}
+<section class="archive-section">
+  <header class="archive-header">
+    <span class="archive-title">Archive</span>
+    <span class="archive-rule"></span>
+  </header>
+  <ul class="archive-list">
+    {% for brief in olderBriefings %}
+    <li>
+      <a href="{{ brief.url }}">
+        <time datetime="{{ brief.fileSlug }}">{{ brief.fileSlug | readableDate }}</time>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
 
 {% if collections.briefings.length == 0 %}
 <p class="empty-state">No briefings yet. Check back tomorrow.</p>
