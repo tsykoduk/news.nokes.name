@@ -15,7 +15,10 @@
 <body>
   <header>
     <div class="masthead">
-      <a href="/" class="masthead-title">{{ site.title }}</a>
+      <div class="masthead-row">
+        <a href="/" class="masthead-title">{{ site.title }}</a>
+        <time class="masthead-date">{{ page.fileSlug | readableDate }}</time>
+      </div>
       <hr class="masthead-rule">
       <hr class="masthead-rule thin">
     </div>
