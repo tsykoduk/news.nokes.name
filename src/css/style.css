@@ -245,40 +245,13 @@ hr {
   margin-bottom: var(--space-xxl);
 }
 
-.featured-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-md);
-  margin-bottom: var(--space-md);
-  flex-wrap: wrap;
-}
-
-.featured-label {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: transparent;
-  padding: var(--space-xs) 0;
-}
-
-.featured-date {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--muted);
-  letter-spacing: 0.05em;
-}
-
-.featured-title {
+.briefing-date {
+  display: block;
   font-family: var(--font-display);
-  font-size: 2.25rem;
-  font-weight: 700;
-  line-height: 1.15;
-  margin-bottom: var(--space-lg);
-  letter-spacing: -0.02em;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: var(--space-md);
 }
 
 .featured-rule {

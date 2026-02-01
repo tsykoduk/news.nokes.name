@@ -29,6 +29,12 @@ module.exports = function(eleventyConfig) {
     return array.slice(start, end);
   });
 
+  // Strip first H1 from content (for homepage where title is redundant)
+  eleventyConfig.addFilter("stripFirstH1", (content) => {
+    if (!content) return content;
+    return content.replace(/<h1[^>]*>.*?<\/h1>\s*/i, '');
+  });
+
   // Sort briefings by date (newest first)
   eleventyConfig.addCollection("briefings", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/briefs/*.md").sort((a, b) => {

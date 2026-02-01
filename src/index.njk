@@ -7,13 +7,10 @@ title: Morning Briefings
 
 {% if latestBriefing %}
 <article class="featured-briefing">
-  <header class="featured-header">
-    <span class="featured-label">Latest Briefing</span>
-    <time class="featured-date" datetime="{{ latestBriefing.fileSlug }}">{{ latestBriefing.fileSlug | readableDate }}</time>
-  </header>
+  <time class="briefing-date" datetime="{{ latestBriefing.fileSlug }}">{{ latestBriefing.fileSlug | readableDate }}</time>
   <hr class="featured-rule">
   <div class="featured-content">
-    {{ latestBriefing.content | safe }}
+    {{ latestBriefing.content | stripFirstH1 | safe }}
   </div>
 </article>
 {% endif %}
