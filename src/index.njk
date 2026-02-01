@@ -1,0 +1,20 @@
+---
+layout: base.njk
+title: Archive
+---
+
+<h1>Briefing Archive</h1>
+
+<ul class="briefing-list">
+{% for brief in collections.briefings %}
+  <li>
+    <a href="{{ brief.url }}">
+      <time>{{ brief.fileSlug | readableDate }}</time>
+    </a>
+  </li>
+{% endfor %}
+</ul>
+
+{% if collections.briefings.length == 0 %}
+<p class="empty-state">No briefings yet. Check back tomorrow.</p>
+{% endif %}
