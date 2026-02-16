@@ -29,6 +29,62 @@ module.exports = function(eleventyConfig) {
     return array.slice(start, end);
   });
 
+  // Group briefings by month (e.g., "February 2026")
+  eleventyConfig.addFilter("groupByMonth", (briefings) => {
+    if (!briefings) return [];
+    const groups = [];
+    const map = new Map();
+
+    for (const brief of briefings) {
+      const date = new Date(brief.fileSlug + "T12:00:00");
+      const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+      const label = date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+
+      if (!map.has(key)) {
+        const group = { key, label, items: [] };
+        map.set(key, group);
+        groups.push(group);
+      }
+      map.get(key).items.push(brief);
+    }
+
+    return groups;
+  });
+
+  // Group briefings by week (Monday-based, e.g., "Feb 10 – 16")
+  eleventyConfig.addFilter("groupByWeek", (briefings) => {
+    if (!briefings) return [];
+    const groups = [];
+    const map = new Map();
+
+    for (const brief of briefings) {
+      const date = new Date(brief.fileSlug + "T12:00:00");
+      const day = date.getDay();
+      const monday = new Date(date);
+      monday.setDate(date.getDate() - ((day + 6) % 7));
+      const key = monday.toISOString().slice(0, 10);
+
+      const sunday = new Date(monday);
+      sunday.setDate(monday.getDate() + 6);
+
+      let label;
+      if (monday.getMonth() === sunday.getMonth()) {
+        label = `${monday.toLocaleDateString("en-US", { month: "short", day: "numeric" })} – ${sunday.getDate()}`;
+      } else {
+        label = `${monday.toLocaleDateString("en-US", { month: "short", day: "numeric" })} – ${sunday.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`;
+      }
+
+      if (!map.has(key)) {
+        const group = { key, label, items: [] };
+        map.set(key, group);
+        groups.push(group);
+      }
+      map.get(key).items.push(brief);
+    }
+
+    return groups;
+  });
+
   // Strip first H1 from content (for homepage where title is redundant)
   eleventyConfig.addFilter("stripFirstH1", (content) => {
     if (!content) return content;

@@ -303,15 +303,103 @@ hr {
   background: var(--rule);
 }
 
+/* Month grouping */
+.archive-month {
+  margin-bottom: var(--space-sm);
+}
+
+.archive-month-label {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--rule);
+  list-style: none;
+  color: var(--ink);
+  transition: color 0.15s ease;
+}
+
+.archive-month-label::-webkit-details-marker {
+  display: none;
+}
+
+.archive-month-label::marker {
+  content: '';
+}
+
+.archive-month-label::before {
+  content: '▸';
+  display: inline-block;
+  margin-right: var(--space-sm);
+  font-size: 0.75rem;
+  color: var(--muted);
+  transition: transform 0.2s ease, color 0.15s ease;
+}
+
+.archive-month[open] > .archive-month-label::before {
+  transform: rotate(90deg);
+}
+
+.archive-month-label:hover {
+  color: var(--accent);
+}
+
+.archive-month-label:hover::before {
+  color: var(--accent);
+}
+
+/* Week grouping */
+.archive-week {
+  margin: var(--space-xs) 0 var(--space-xs) var(--space-md);
+}
+
+.archive-week-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: var(--space-xs) 0;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  list-style: none;
+  transition: color 0.15s ease;
+}
+
+.archive-week-label::-webkit-details-marker {
+  display: none;
+}
+
+.archive-week-label::marker {
+  content: '';
+}
+
+.archive-week-label::before {
+  content: '▸';
+  display: inline-block;
+  margin-right: var(--space-xs);
+  font-size: 0.65rem;
+  transition: transform 0.2s ease, color 0.15s ease;
+}
+
+.archive-week[open] > .archive-week-label::before {
+  transform: rotate(90deg);
+}
+
+.archive-week-label:hover {
+  color: var(--ink);
+}
+
+/* Briefing list within weeks */
 .archive-list {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 var(--space-sm);
 }
 
 .archive-list li {
   margin: 0;
-  padding: var(--space-sm) 0;
+  padding: var(--space-xs) 0;
   border-bottom: 1px solid var(--rule);
 }
 

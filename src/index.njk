@@ -38,15 +38,27 @@
     <span class="archive-title">Archive</span>
     <span class="archive-rule"></span>
   </header>
-  <ul class="archive-list">
-    {% for brief in olderBriefings %}
-    <li>
-      <a href="{{ brief.url }}">
-        <time datetime="{{ brief.fileSlug }}">{{ brief.fileSlug | readableDate }}</time>
-      </a>
-    </li>
+  {% set months = olderBriefings | groupByMonth %}
+  {% for month in months %}
+  <details class="archive-month"{{ " open" if loop.first }}>
+    <summary class="archive-month-label">{{ month.label }}</summary>
+    {% set weeks = month.items | groupByWeek %}
+    {% for week in weeks %}
+    <details class="archive-week"{{ " open" if loop.first }}>
+      <summary class="archive-week-label">{{ week.label }}</summary>
+      <ul class="archive-list">
+        {% for brief in week.items %}
+        <li>
+          <a href="{{ brief.url }}">
+            <time datetime="{{ brief.fileSlug }}">{{ brief.fileSlug | readableDate }}</time>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </details>
     {% endfor %}
-  </ul>
+  </details>
+  {% endfor %}
 </section>
 {% endif %}
 
